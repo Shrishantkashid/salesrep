@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Priya Sharma",
+    "company": "Rentokil",
+    "title": "VP Sales",
+    "interactions": [
+      { "summary": "Initial discovery call. Priya flagged a budget freeze until Q3. Interested but non-committal. Comparing with Salesforce.", "outcome": "first_contact", "days_ago": 42 },
+      { "summary": "Second call. Pushed back on onboarding timeline — wants setup complete in under 2 weeks. Raised Salesforce again as a benchmark. Asked for a case study from a similar company.", "outcome": "objection_logged", "days_ago": 21 },
+      { "summary": "Demo call. Loved the ROI calculator — asked to keep access. Requested a pilot with 3 reps before committing. Onboarding timeline still a concern.", "outcome": "positive_signal", "days_ago": 14 },
+      { "summary": "Follow-up. Agreed to the 3-rep pilot starting next month. Budget approved post-Q3. New concern: data migration from their current CRM.", "outcome": "deal_progressed", "days_ago": 6 }
+    ]
+  },
+  {
+    "name": "James Okafor",
+    "company": "Paysend",
+    "title": "Head of Revenue",
+    "interactions": [
+      { "summary": "Cold outreach converted to a call. James is evaluating 3 vendors. Primary concern is API reliability — they had a bad experience with their last provider going down during peak hours.", "outcome": "first_contact", "days_ago": 30 },
+      { "summary": "Technical deep dive. His engineering lead joined. They grilled us on uptime SLAs. Positive reaction to the 99.9% guarantee. James asked for a security audit report.", "outcome": "positive_signal", "days_ago": 18 },
+      { "summary": "Sent the security report. James liked it but legal is reviewing. He mentioned one competitor offered a lower price. May need a discounted pilot to move forward.", "outcome": "objection_logged", "days_ago": 7 }
+    ]
+  },
+  {
+    "name": "Sarah Linden",
+    "company": "Fetch Rewards",
+    "title": "Director of Partnerships",
+    "interactions": [
+      { "summary": "First call. Sarah was warm but distracted. Her team is mid-reorg. She asked to reconnect in 6 weeks when things settle. No objections raised — just bad timing.", "outcome": "first_contact", "days_ago": 50 },
+      { "summary": "Reconnect as scheduled. Reorg is done. New focus on scaling partner integrations. Very interested in our API. Asked for pricing for 10 seats.", "outcome": "positive_signal", "days_ago": 8 }
+    ]
+  },
+  {
+    "name": "Marcus Webb",
+    "company": "Trainline",
+    "title": "Commercial Director",
+    "interactions": [
+      { "summary": "Intro call via LinkedIn referral. Marcus is looking for a solution to replace spreadsheet-based pipeline tracking. Budget is there, timeline is Q4. Main concern is change management — his team resists new tools.", "outcome": "first_contact", "days_ago": 15 },
+      { "summary": "Second call. Showed him the onboarding flow. He appreciated the simplicity. Still worried about team adoption. Asked if we could do a lunch-and-learn session with his 8 reps.", "outcome": "positive_signal", "days_ago": 5 }
+    ]
+  },
+  {
+    "name": "Anika Patel",
+    "company": "GoCardless",
+    "title": "VP Growth",
+    "interactions": [
+      { "summary": "First call. Anika is highly technical and asked detailed questions about our data model. She flagged GDPR compliance as a hard requirement — they process EU customer data. Needs a DPA signed before moving forward.", "outcome": "first_contact", "days_ago": 10 }
+    ]
+  }
+]
