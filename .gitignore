@@ -1,2 +1,2 @@
 #ignore environmental variables 
-.env
+backend/.env
