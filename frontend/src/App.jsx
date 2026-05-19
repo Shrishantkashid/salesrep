@@ -4,7 +4,34 @@ import PostCallLogger from './components/PostCallLogger';
 import MemoryTimeline from './components/MemoryTimeline';
 import { checkHealth } from './api';
 
-function App() {
+function LandingPage({ onEnter }) {
+  return (
+    <div className="min-h-screen text-slate-100 font-sans relative overflow-hidden flex items-center justify-center px-6">
+      <div className="aurora-bg"></div>
+      <section className="relative z-10 max-w-5xl w-full rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-2xl shadow-2xl shadow-violet-950/40 p-8 md:p-14 fade-up">
+        <p className="text-cyan-300 text-xs tracking-[0.26em] uppercase font-semibold mb-5">SalesMemory Platform</p>
+        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-4xl">
+          Build context before every sales conversation.
+        </h1>
+        <p className="mt-6 max-w-2xl text-slate-300 leading-relaxed text-base md:text-lg">
+          Launch your AI-powered workspace to prepare pre-call briefs, log outcomes, and explore timeline memory for every prospect.
+        </p>
+
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <button
+            onClick={onEnter}
+            className="px-7 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 text-white font-semibold hover:from-cyan-400 hover:to-violet-400 transition-all shadow-lg shadow-cyan-900/40"
+          >
+            Enter Workspace
+          </button>
+          <span className="text-slate-400 text-sm">Takes you to the Pre-call brief home tab.</span>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function AppHome() {
   const [activeTab, setActiveTab] = useState('brief');
   const [useMemory, setUseMemory] = useState(true);
   const [health, setHealth] = useState({ status: 'loading', hindsight: 'unknown' });
@@ -86,6 +113,16 @@ function App() {
       </footer>
     </div>
   );
+}
+
+function App() {
+  const [inWorkspace, setInWorkspace] = useState(false);
+
+  if (!inWorkspace) {
+    return <LandingPage onEnter={() => setInWorkspace(true)} />;
+  }
+
+  return <AppHome />;
 }
 
 export default App;
