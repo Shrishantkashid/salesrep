@@ -28,38 +28,38 @@ const PostCallLogger = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+    <div className="max-w-2xl mx-auto bg-slate-900/70 p-8 rounded-lg shadow-sm border border-white/10">
       <h2 className="text-xl font-semibold mb-6">Log Interaction</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Prospect Name</label>
+          <label className="block text-sm font-medium text-slate-200 mb-1">Prospect Name</label>
           <input
             type="text"
             value={prospectName}
             onChange={(e) => setProspectName(e.target.value)}
             placeholder="Priya Sharma"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100"
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Call Notes</label>
+          <label className="block text-sm font-medium text-slate-200 mb-1">Call Notes</label>
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             placeholder="What happened? Objections raised, decisions made, next steps..."
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 text-gray-800 resize-none"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 h-32 text-slate-100 resize-none"
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Outcome</label>
+          <label className="block text-sm font-medium text-slate-200 mb-1">Outcome</label>
           <select
             value={outcome}
             onChange={(e) => setOutcome(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 text-slate-100"
           >
             <option value="first_contact">First contact</option>
             <option value="objection_logged">Objection logged</option>
@@ -71,14 +71,14 @@ const PostCallLogger = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors disabled:bg-blue-300"
+          className="w-full bg-cyan-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-cyan-400 transition-colors disabled:bg-cyan-800"
         >
           {loading ? 'Saving to Hindsight...' : 'Save to memory'}
         </button>
       </form>
 
       {message && (
-        <div className="mt-6 p-4 bg-green-50 text-green-700 rounded-md border border-green-100 flex items-center gap-2">
+        <div className="mt-6 p-4 bg-emerald-500/10 text-emerald-200 rounded-md border border-emerald-400/20 flex items-center gap-2">
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
@@ -87,7 +87,7 @@ const PostCallLogger = () => {
       )}
 
       {error && (
-        <div className="mt-6 p-4 bg-red-50 text-red-700 rounded-md border border-red-100">
+        <div className="mt-6 p-4 bg-rose-500/10 text-rose-200 rounded-md border border-rose-400/20">
           {error}
         </div>
       )}
