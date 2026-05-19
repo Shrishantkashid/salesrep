@@ -43,3 +43,13 @@ export async function getTimeline(prospectName) {
   }
   return res.json();
 }
+
+export async function getDigest() {
+  const res = await fetch(`${BASE}/digest`)
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err.detail || 'Failed to generate digest')
+  }
+  return res.json()
+}
+

@@ -115,18 +115,23 @@ async def get_timeline(prospect_name: str) -> list:
 
 async def get_all_prospects() -> list[str]:
     """Return all unique prospect names stored in Hindsight memory."""
-    response = await client.arecall(
-        bank_id=BANK_ID,
-        query="all prospects and call log interactions",
-        tags=["type:call_log"],
-        tags_match="any_strict",
-        max_tokens=4000
-    )
+    try:
+        response = await client.arecall(
+            bank_id=BANK_ID,
+            query="prospect call log interaction summary",
+            tags=["type:call_log"],
+            tags_match="any_strict",
+            max_tokens=4000
+        )
 
-    names = set()
-    for item in response.results:
-        meta = item.metadata or {}
-        if meta.get('prospect'):
-            names.add(meta['prospect'])
+        names = set()
+        if response and response.results:
+            for item in response.results:
+                metadata = item.metadata or {}
+                prospect = metadata.get("prospect")
+                if prospect:
+                    names.add(prospect)
 
-    return list(names)
+        return list(names)
+    except Exception:
+        return []

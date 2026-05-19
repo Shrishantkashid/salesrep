@@ -2,8 +2,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
+import json
 import memory
 import agent
+from agent import generate_digest
 
 app = FastAPI(title="Sales Memory Agent API")
 
@@ -113,3 +115,20 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+@app.get("/digest")
+async def get_weekly_digest():
+    try:
+        result = await generate_digest()
+        return result
+    except json.JSONDecodeError:
+        raise HTTPException(
+            status_code=500,
+            detail="Digest generation failed — LLM returned malformed JSON. Try again."
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Digest generation failed: {str(e)}"
+        )

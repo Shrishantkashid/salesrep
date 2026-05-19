@@ -1,8 +1,11 @@
 import os
 import json
+from datetime import datetime
 from groq import Groq
 from dotenv import load_dotenv
-from prompts import BRIEF_SYSTEM_PROMPT, build_brief_prompt
+from prompts import BRIEF_SYSTEM_PROMPT, build_brief_prompt, DIGEST_SYSTEM_PROMPT, build_digest_prompt
+
+from memory import get_all_prospects, recall_prospect
 
 load_dotenv()
 
@@ -62,3 +65,66 @@ async def generate_brief(prospect_name: str, recalled_context: str, interaction_
             "memory_backed": True,
             "deal_health": None
         }
+
+
+
+async def generate_digest() -> dict:
+    """
+    Retrieve all known prospects from Hindsight, recall memory for each,
+    and ask the LLM to categorise and prioritise them in a single call.
+    """
+    all_prospects = await get_all_prospects()
+
+    if not all_prospects:
+        return {
+            "generated_at": datetime.utcnow().isoformat(),
+            "total_prospects": 0,
+            "summary_line": "No prospect memory found yet. Log some calls first.",
+            "needs_attention": [],
+            "follow_up_this_week": [],
+            "on_track": []
+        }
+
+    prospect_contexts = []
+    for name in all_prospects:
+        recalled_text, _interaction_count = await recall_prospect(name)
+        if recalled_text:
+            prospect_contexts.append({
+                "name": name,
+                "context": str(recalled_text)
+            })
+
+    if not prospect_contexts:
+        return {
+            "generated_at": datetime.utcnow().isoformat(),
+            "total_prospects": 0,
+            "summary_line": "Memory found but could not be recalled. Try again.",
+            "needs_attention": [],
+            "follow_up_this_week": [],
+            "on_track": []
+        }
+
+    prompt = build_digest_prompt(prospect_contexts)
+
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": DIGEST_SYSTEM_PROMPT},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.3,
+        max_tokens=1500
+    )
+
+    raw = response.choices[0].message.content.strip()
+
+    if raw.startswith("```"):
+        raw = raw.split("```")[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+    raw = raw.strip()
+
+    parsed = json.loads(raw)
+    parsed["generated_at"] = datetime.utcnow().isoformat()
+    parsed["total_prospects"] = len(prospect_contexts)
+    return parsed
