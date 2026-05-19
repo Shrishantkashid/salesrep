@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900 font-sans;
+  @apply bg-slate-950 text-slate-100 font-sans;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.aurora-bg {
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(34, 211, 238, 0.18), transparent 42%),
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.22), transparent 45%),
+    radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.14), transparent 42%),
+    #020617;
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.fade-up {
+  animation: fadeUp 650ms ease-out both;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
